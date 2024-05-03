@@ -51,5 +51,16 @@ Overview: This repository contains two files: functions, which contains all of t
 
   ### parameters 
 
+    new_weights: values to assign the weights attribute of the asset_data class
+
+    asset_data: an instance of the asset_data class to update
+
+## function: reweighted_volatility(new_weights, asset_data)
+
+  ### parameters 
+
+    new_weights: values to assign the weights attribute of the asset_data class
+
+    asset_data: an instance of the asset_data class to update
     
     
