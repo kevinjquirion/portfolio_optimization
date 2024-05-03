@@ -27,6 +27,7 @@ class: functions.asset_data(tickers, start_date, end_date, price_column = 'Adj C
   Attributes:
   
     rf_rate: the risk free rate taken as the 10 year US treasury note yield
+    
     prices: daily prices of 'tickers' determined by 'price_column'
     
     log_return: daily change of each portfolio element measured as log(1 + pct_change)
