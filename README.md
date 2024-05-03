@@ -9,6 +9,8 @@ Overview: This repository contains two files: functions, which contains all of t
 
 ## class: functions.asset_data(tickers, start_date, end_date, price_column = 'Adj Close')
 
+  Holds the details of the portfolio, as well as the ability to update the relative weights of the holdings.
+
   ### Parameters:
   
     tickers: list
