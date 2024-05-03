@@ -4,7 +4,7 @@
 Overview: This repository contains two files: functions, which contains all of the classes and functions of the repository, and main, which provides an example of what the functions can do.
 
 
-## functions ##
+## functions.py ##
 
 
 class: functions.asset_data(tickers, start_date, end_date, price_column = 'Adj Close')
