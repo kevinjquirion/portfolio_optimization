@@ -43,6 +43,8 @@ class: functions.asset_data(tickers, start_date, end_date, price_column = 'Adj C
     sharpe_ratio: excess returns over the risk free rate divided by the volatility
 
   Methods:
+  
     set_weights(weights):
+    
       recalculate volatility, expected returns, and sharpe ratio given new weights for the portfolio
     
