@@ -9,7 +9,7 @@ Overview: This repository contains two files: functions, which contains all of t
 
 ## class: functions.asset_data(tickers, start_date, end_date, price_column = 'Adj Close')
 
-  Parameters:
+  ### Parameters:
   
     tickers: list
       list of tickers to pull from market data using yahoo finance
@@ -23,7 +23,7 @@ Overview: This repository contains two files: functions, which contains all of t
     price_column: str
       column name to use for calculating returns, volitility, and other metrics.
 
-  Attributes:
+  ### Attributes:
   
     rf_rate: the risk free rate taken as the 10 year US treasury note yield
     
@@ -41,7 +41,7 @@ Overview: This repository contains two files: functions, which contains all of t
     
     sharpe_ratio: excess returns over the risk free rate divided by the volatility
 
-  Methods:
+  ### Methods:
   
     set_weights(weights):
     
