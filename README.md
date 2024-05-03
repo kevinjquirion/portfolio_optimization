@@ -11,7 +11,7 @@ Overview: This repository contains two files: functions, which contains all of t
 
   ### Parameters:
   
-    __tickers__ : list
+    tickers: list
       list of tickers to pull from market data using yahoo finance
       
     start_date: datetime object
