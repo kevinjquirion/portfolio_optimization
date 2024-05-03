@@ -9,7 +9,9 @@ Overview: This repository contains two files: functions, which contains all of t
 ###############
 
 class: functions.asset_data(tickers, start_date, end_date, price_column = 'Adj Close')
+
   Parameters:
+  
     tickers: list
       list of tickers to pull from market data using yahoo finance
       
