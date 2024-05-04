@@ -132,4 +132,9 @@ Overview: This repository contains two files: functions, which contains all of t
     max_sharpe: weights, returns, volatility, and sharpe ratio of the simulation with the highest Sharpe ratio
     
     min_volatility: weights, returns, volatility, and sharpe ratio of the simulation with the lowest volatility
+
+
+# In the works #
+
+Adding a method which takes as an argument the desired risk and returns the weights corresponding to the maximim returns for this level of risk
     
