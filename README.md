@@ -54,7 +54,7 @@ Overview: This repository contains two files: functions, which contains all of t
 
 ## function: reweighted_sharpe(new_weights, asset_data)
 
-  `rgb(0,0,100)` return the sharpe ratio of the asset data with new weights
+  return the sharpe ratio of the asset data with new weights
 
   ### parameters:
 
@@ -81,6 +81,8 @@ Overview: This repository contains two files: functions, which contains all of t
   ### returns:
 
     reweighted volatility
+
+    
 
 ## function: optimize_sharpe_ratio(asset_data, initial_guess, min_weight, max_weight)
 
