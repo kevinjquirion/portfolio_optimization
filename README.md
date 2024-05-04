@@ -48,6 +48,8 @@ Overview: This repository contains two files: functions, which contains all of t
     set_weights(weights):
     
       recalculate volatility, expected returns, and sharpe ratio given new weights for the portfolio
+
+      
       
 
 ## function: reweighted_sharpe(new_weights, asset_data)
@@ -63,6 +65,8 @@ Overview: This repository contains two files: functions, which contains all of t
   ### returns:
 
     reweighted Sharpe ratio
+
+    
 
 ## function: reweighted_volatility(new_weights, asset_data)
 
