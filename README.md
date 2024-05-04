@@ -52,7 +52,7 @@ Overview: This repository contains two files: functions, which contains all of t
       
       
 
-## function: reweighted_sharpe(new_weights, asset_data)
+## method: functions.reweighted_sharpe(new_weights, asset_data)
 
   return the sharpe ratio of the asset data with new weights
 
@@ -68,7 +68,7 @@ Overview: This repository contains two files: functions, which contains all of t
 
     
 
-## function: reweighted_volatility(new_weights, asset_data)
+## method: functions.reweighted_volatility(new_weights, asset_data)
 
   return the volatility of the asset data with new weights
 
@@ -84,8 +84,52 @@ Overview: This repository contains two files: functions, which contains all of t
 
     
 
-## function: optimize_sharpe_ratio(asset_data, initial_guess, min_weight, max_weight)
+## method: functions.optimize_sharpe_ratio(asset_data, initial_guess, min_weight, max_weight)
 
-  ### parameters 
+  ### parameters:
+
+    asset_data: an instance of the asset_data class whose Sharpe ratio we want to optimize
+
+    initial_guess: initial values for the relative weights of each holding in the portfolio
+
+    min_weight: minimum allowed value for each of the weights
+
+    max_weight: maximim allowed value for each of the weights
+
+  ### returns:
+
+    weights: weights which result in the optimal Sharpe ratio
+
     
+## method: functions.optimize_volatility(asset_data, initial_guess, min_weight, max_weight)
+
+  ### parameters:
+
+    asset_data: an instance of the asset_data class whose Sharpe ratio we want to optimize
+
+    initial_guess: initial values for the relative weights of each holding in the portfolio
+
+    min_weight: minimum allowed value for each of the weights
+
+    max_weight: maximim allowed value for each of the weights
+
+  ### returns:
+
+    weights: weights which result in the minimum volatility
+
+## method: functions.sharpe_monte_carlo(num_iterations, asset_data)
+
+  ### parameters:
+
+    num_iterations: number of portfolios to randomly simulate
+
+    asset_data: an instance of the asset_data class
+
+  ### returns:
+
+    axes: plot containing the information on the Sharpe ratio as a function of returns and volatility
+
+    max_sharpe: weights, returns, volatility, and sharpe ratio of the simulation with the highest Sharpe ratio
+    
+    min_volatility: weights, returns, volatility, and sharpe ratio of the simulation with the lowest volatility
     
