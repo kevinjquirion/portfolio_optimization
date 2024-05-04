@@ -54,7 +54,7 @@ Overview: This repository contains two files: functions, which contains all of t
 
 ## function: reweighted_sharpe(new_weights, asset_data)
 
-  `rgb(0,0,100) return the sharpe ratio of the asset data with new weights`
+  `rgb(0,0,100)` return the sharpe ratio of the asset data with new weights
 
   ### parameters:
 
