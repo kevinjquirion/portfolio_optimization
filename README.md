@@ -54,21 +54,29 @@ Overview: This repository contains two files: functions, which contains all of t
 
   return the sharpe ratio of the asset data with new weights
 
-  ### parameters 
+  ### parameters:
 
     new_weights: values to assign the weights attribute of the asset_data class
 
     asset_data: an instance of the asset_data class to update
+
+  ### returns:
+
+    reweighted Sharpe ratio
 
 ## function: reweighted_volatility(new_weights, asset_data)
 
   return the volatility of the asset data with new weights
 
-  ### parameters 
+  ### parameters:
 
     new_weights: values to assign the weights attribute of the asset_data class
 
     asset_data: an instance of the asset_data class to update
+
+  ### returns:
+
+    reweighted volatility
 
 ## function: optimize_sharpe_ratio(asset_data, initial_guess, min_weight, max_weight)
 
