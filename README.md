@@ -145,7 +145,4 @@ Overview: This repository contains two files: functions, which contains all of t
 
 
 
-# In the works #
-
-Adding a method which takes as an argument the desired risk and returns the weights corresponding to the maximim returns for this level of risk
     
