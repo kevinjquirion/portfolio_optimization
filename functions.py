@@ -5,12 +5,12 @@ import yfinance as yf
 import pandas as pd
 import numpy as np
 
-
+## class to hold price data and some other metrics ##
 class asset_data:
     ## load in the 10 ys treasury note yield as the risk free rate ##
     rf_rate = yf.download(
-        '^TNX',start=datetime.today() - timedelta(1), end = datetime.today()
-        )['Adj Close'].iloc[0] / 100
+        '^TNX',start=datetime.today() - timedelta(5), end = datetime.today()
+        )['Adj Close'].iloc[-1] / 100
     ## initialize variables ##
     prices = pd.DataFrame()
     log_return = pd.DataFrame()
@@ -40,6 +40,48 @@ class asset_data:
             )
         self.exp_returns = np.sum( (self.log_return.mean() * self.weights) * 252 )
         self.sharpe_ratio = ( self.exp_returns - self.rf_rate) / self.volatility
+
+## class to create, store, and retrive MC simulation data about portfolios ##
+class mc_portfolios:
+    sim_data = pd.DataFrame()
+    def __init__(self,num_simulations,asset_data):
+        progress = ['|','\\','-','/']
+        num_holdings = len(asset_data.weights)
+        all_weights = np.zeros((num_simulations,num_holdings))
+        all_returns = np.zeros((num_simulations))
+        all_volatilities = np.zeros((num_simulations))
+        all_sharpe_ratios = np.zeros((num_simulations))
+        for ind in range(num_simulations):
+            if ind % 300 == 0:
+                i = (ind//300) % 4
+                print(
+                     ' '*7 + progress[i] + '  generating random weights  ' + progress[i],end='\r'
+                     )
+            temp_weights = np.random.random(size = num_holdings) 
+            temp_weights = temp_weights / np.sum(temp_weights)
+            all_weights[ind] = temp_weights
+            asset_data.set_weights(temp_weights)
+            all_returns[ind] = asset_data.exp_returns
+            all_volatilities[ind] = asset_data.volatility
+            all_sharpe_ratios[ind] = asset_data.sharpe_ratio
+        self.sim_data['weights'] = pd.Series(list(all_weights))
+        self.sim_data['returns'] = pd.Series(all_returns)
+        self.sim_data['volatility'] = pd.Series(all_volatilities)
+        self.sim_data['sharpe ratio'] = pd.Series(all_sharpe_ratios)
+    def get_max_sharpe(self):
+        max_sharpe = self.sim_data.loc[self.sim_data['sharpe ratio'].idxmax()]
+        return max_sharpe
+    def get_min_risk(self):
+        min_risk = self.sim_data.loc[self.sim_data['volatility'].idxmin()]
+        return min_risk
+    def get_max_return(self,max_risk = -1):
+        if max_risk < 0:
+            return self.sim_data.loc[self.sim_data['returns'].idxmax()]
+        else:
+            allowed = self.sim_data.loc[self.sim_data['volatility'] <= max_risk]
+            return allowed.loc[allowed['returns'].idxmax()]
+
+
 
 ## get the sharpe ratio of the reweighted portfolio ##
 def reweighted_sharpe(new_weights,asset_data):
@@ -76,49 +118,6 @@ def optimize_volatility(asset_data,initial_guess,min_weight,max_weight):
     return result
 
 
-## monte carlo simulation of portfolio weighting  ##
-## pick out optimized sharpe ratio and volatility ##
-def sharpe_monte_carlo(num_iterations,asset_data):
-    num_holdings = len(asset_data.weights)
-    all_weights = np.zeros((num_iterations,num_holdings))
-    all_returns = np.zeros((num_iterations))
-    all_volatilities = np.zeros((num_iterations))
-    all_sharpe_ratios = np.zeros((num_iterations))
-    for ind in range(num_iterations):
-        temp_weights = np.random.random(size = num_holdings) 
-        temp_weights = temp_weights / np.sum(temp_weights)
-        all_weights[ind] = temp_weights
-        asset_data.set_weights(temp_weights)
-        all_returns[ind] = asset_data.exp_returns
-        all_volatilities[ind] = asset_data.volatility
-        all_sharpe_ratios[ind] = asset_data.sharpe_ratio
-    mc_results = pd.DataFrame()
-    mc_results['weights'] = pd.Series(list(all_weights))
-    mc_results['returns'] = pd.Series(all_returns)
-    mc_results['volatility'] = pd.Series(all_volatilities)
-    mc_results['sharpe ratio'] = pd.Series(all_sharpe_ratios)
-
-    max_sharpe = mc_results.loc[mc_results['sharpe ratio'].idxmax()]
-    min_volatility = mc_results.loc[mc_results['volatility'].idxmin()]
-
-    fig,ax = plt.subplots(1,1,figsize=(12,8))
-    im = ax.scatter(
-        x=mc_results['volatility'],y=mc_results['returns'],c=mc_results['sharpe ratio'],cmap='jet'
-        )
-    ax.scatter(
-        x=max_sharpe[2],y=max_sharpe[1],marker='X',s=150,c='b',label='Maximum Sharpe Ratio'
-        )
-    ax.scatter(
-        x=min_volatility[2],y=min_volatility[1],marker='X',s=150,c='r',label='Minimum Volatility'
-        )
-    ax.set_xlabel('Volatility',fontsize=18,labelpad=20)
-    ax.set_ylabel('Expected Return',fontsize=18,labelpad=20)
-    ax.legend(fontsize=18)
-    cbar = plt.colorbar(im,ax=ax)
-    cbar.set_label(label='Sharpe Ratio',fontsize=18,labelpad=20)
-    ax.tick_params(which='both',labelsize=16,direction='in')
-
-    return ax,max_sharpe,min_volatility
 
     
     
