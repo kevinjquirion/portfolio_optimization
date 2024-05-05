@@ -50,7 +50,33 @@ Overview: This repository contains two files: functions, which contains all of t
       recalculate volatility, expected returns, and sharpe ratio given new weights for the portfolio
 
       
-      
+## class: mc_portfolios(num_simulations, asset_data)
+
+  class holding mc_simulations of the portfolio in asset_data with random weights
+
+  ### parameters:
+
+    num_simulations: the number of sets of random weights to generate
+
+    asset_data: the portfolio of which to gerenate random sets of weights
+
+  ### attributes:
+
+    sim_data: pandas dataframe containing weights, returns, volatility, and sharpe ratio for each set of random weights
+
+  ### methods:
+
+    get_max_sharpe()
+
+      returns the row of sim_data with the highest sharpe ratio
+
+    get_min_risk()
+
+      returns the row of sim_data with the lowest volatility
+
+    get_max_return(max_risk)
+
+      returns the row of sim_data with the highest return given the maximum acceptable risk 'max_risk'
 
 ## method: functions.reweighted_sharpe(new_weights, asset_data)
 
@@ -117,21 +143,6 @@ Overview: This repository contains two files: functions, which contains all of t
 
     weights: weights which result in the minimum volatility
 
-## method: functions.sharpe_monte_carlo(num_iterations, asset_data)
-
-  ### parameters:
-
-    num_iterations: number of portfolios to randomly simulate
-
-    asset_data: an instance of the asset_data class
-
-  ### returns:
-
-    axes: plot containing the information on the Sharpe ratio as a function of returns and volatility
-
-    max_sharpe: weights, returns, volatility, and sharpe ratio of the simulation with the highest Sharpe ratio
-    
-    min_volatility: weights, returns, volatility, and sharpe ratio of the simulation with the lowest volatility
 
 
 # In the works #
